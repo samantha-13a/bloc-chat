@@ -34,17 +34,21 @@ class RoomList extends Component {
   render() {
     return (
       <section>
+        <section className="app-title">
+          <h1>Bloc Chat</h1>
+        </section>
         <section className="room-list">
         {this.state.rooms.map( (room) =>
           <div>{room.name}</div>
         )}
         </section>
         <section> 
-          <form className="create-room" onSubmit={this.createRoom}>
-            <label>
+          <form className="create-room" onSubmit={this.createRoom.bind(this)}>
               <h3>Create Room</h3>
-              <input type="text" ref={(input) => this.input = input} />
-            </label>
+              <input 
+                type="text" 
+                value={this.state.newRoomName}
+                onChange={this.handleChange.bind(this)} />
             <button>
               <input type="submit" value="Submit" />
             </button>
