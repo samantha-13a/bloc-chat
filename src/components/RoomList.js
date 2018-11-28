@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './RoomList.css';
 
 class RoomList extends Component {
   constructor(props){
@@ -28,7 +29,11 @@ class RoomList extends Component {
   }
 
   handleChange(e) {
-    this.setState({newRoomName: e.target.value})
+    this.setState({newRoomName: e.target.value});
+  }
+
+  selectRoom(room) {
+    this.props.setActiveRoom(room);
   }
 
   render() {
@@ -39,7 +44,14 @@ class RoomList extends Component {
         </section>
         <section className="room-list">
         {this.state.rooms.map( (room) =>
-          <div>{room.name}</div>
+          <div>
+            <button 
+              className={this.props.activeRoomId == room.key ? "active-room" : ""}
+              onClick={ () => this.props.setActiveRoom(room) }
+            >
+              {room.name}
+            </button>
+          </div>
         )}
         </section>
         <section> 
